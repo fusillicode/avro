@@ -880,7 +880,9 @@ impl Parser {
         let fully_qualified_name = name.fully_qualified_name(enclosing_namespace);
 
         if self.parsed_schemas.get(&fully_qualified_name).is_some() {
-            return Ok(Schema::Ref { name });
+            return Ok(Schema::Ref {
+                name: fully_qualified_name,
+            });
         }
         if let Some(resolving_schema) = self.resolving_schemas.get(&fully_qualified_name) {
             return Ok(resolving_schema.clone());
